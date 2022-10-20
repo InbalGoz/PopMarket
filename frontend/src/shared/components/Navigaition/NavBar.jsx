@@ -1,84 +1,54 @@
 import React from "react";
-import {
-  Box,
-  Stack,
-  Grid,
-  AppBar,
-  Typography,
-  IconButton,
-  Badge,
-  MenuItem,
-  Menu,
-  Toolbar,
-  InputBase,
-  Button,
-  Link,
-  Breadcrumbs,
-} from "@mui/material";
+import { Box, Stack, Link } from "@mui/material";
 
 const preventDefault = (event) => event.preventDefault();
+
 const NavBar = () => {
   return (
-    <Box
-      display='flex'
+    <Stack
+      direction='row'
       justifyContent='center'
       alignItems='center'
-      //minHeight='8vh'
+      spacing={7}
     >
-      <Stack
-        direction='row'
-        spacing={7}
-        sx={{
-          textAlign: "center",
-          marginRight: 20,
-
-          fontSize: 60,
-        }}
+      <Link
+        variant='h5'
+        underline='hover'
+        color='inherit'
+        href='#'
+        sx={{ fontFamily: "Lobster, cursive", fontSize: 30 }}
       >
-        <Link
-          variant='h5'
-          underline='hover'
-          color='inherit'
-          href='#'
-          sx={{ fontFamily: "Lobster, cursive" }}
-        >
-          New
-        </Link>
-        <Link
-          variant='h5'
-          underline='hover'
-          color='inherit'
-          href='#'
-          sx={{ fontFamily: "Lobster, cursive" }}
-        >
-          Popular
-        </Link>
-        <Link
-          variant='h5'
-          underline='hover'
-          color='inherit'
-          href='#'
-          sx={{ fontFamily: "Lobster, cursive" }}
-        >
-          Special Edition
-        </Link>
-        <Link
-          variant='h5'
-          underline='hover'
-          color='inherit'
-          href='#'
-          sx={{ fontFamily: "Lobster, cursive" }}
-        >
-          More
-        </Link>
-      </Stack>
-    </Box>
+        New
+      </Link>
+      <Link
+        variant='h5'
+        underline='hover'
+        color='inherit'
+        href='#'
+        sx={{ fontFamily: "Lobster, cursive", fontSize: 30 }}
+      >
+        Popular
+      </Link>
+      <Link
+        variant='h5'
+        underline='hover'
+        color='inherit'
+        href='#'
+        sx={{ fontFamily: "Lobster, cursive", fontSize: 30 }}
+      >
+        Special Edition
+      </Link>
+      <Link
+        variant='h5'
+        underline='hover'
+        color='inherit'
+        href='#'
+        sx={{ fontFamily: "Lobster, cursive", fontSize: 30 }}
+      >
+        More
+      </Link>
+    </Stack>
   );
 };
 
 export default NavBar;
-/*
- <div style={{ display: "flex", justifyContent: "center" }}>
-     
-    </div>
-*/

@@ -20,13 +20,7 @@ const PopProduct = () => {
   return (
     <Card sx={{ maxWidth: 345 }}>
       <CardActionArea>
-        <CardMedia
-          component='img'
-          height='240'
-          src={CruellaPop}
-          //width={}
-          //src='https://www.bug.co.il/images/site/products/8cdd645c-fafd-4704-90f5-ed0ec8354c46.jpg'
-        ></CardMedia>
+        <CardMedia component='img' height='240' src={CruellaPop}></CardMedia>
         <CardContent style={{ fontFamily: "Lobster, cursive" }}>
           <Typography gutterBottom variant='h6' component='div'>
             Pop Disney: Villains Cruella De Vil Vinyl Figure
