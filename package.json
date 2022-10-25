@@ -1,10 +1,14 @@
 {
   "name": "popmarket",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "MERN shopping cart app",
+  "main": "server.js",
+  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node backend/server",
+    "server": "nodemon backend/server",
+    "data:import": "node backend/seeder",
+    "data:destroy": "node backend/seeder -d"
   },
   "repository": {
     "type": "git",
@@ -15,5 +19,17 @@
   "bugs": {
     "url": "https://github.com/InbalGoz/PopMarket/issues"
   },
-  "homepage": "https://github.com/InbalGoz/PopMarket#readme"
+  "homepage": "https://github.com/InbalGoz/PopMarket#readme",
+  "dependencies": {
+    "axios": "^1.1.3",
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^6.6.5"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  }
 }

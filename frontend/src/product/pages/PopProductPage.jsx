@@ -11,7 +11,7 @@ import {
   Paper,
   Button,
 } from "@mui/material";
-import pop1 from "../assets/cruella1.jpg";
+import pop1 from "../../images/cruella1.jpg";
 
 const PopProductPage = () => {
   return (

@@ -5,6 +5,9 @@ import PopProductPage from "./product/pages/PopProductPage";
 import RegisterPage from "./user/pages/RegisterPage";
 import LoginPage from "./user/pages/LoginPage";
 
+import ProductCarousel from "./product/components/ProductCarousel";
+import PopProduct from "./product/components/PopProduct";
+
 function App() {
   return <HomePage />;
 }

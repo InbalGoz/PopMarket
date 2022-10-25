@@ -3,7 +3,7 @@ import MainHeader from "../components/Navigaition/MainHeader";
 import NavBar from "../components/Navigaition/NavBar";
 import PopImage from "../../images/combined2.jpg";
 import { Box, Grid, Stack } from "@mui/material";
-import ProductCarousel from "../components/ProductCarousel";
+import ProductCarousel from "../../product/components/ProductCarousel";
 import Footer from "../components/Footer";
 
 const HomePage = () => {

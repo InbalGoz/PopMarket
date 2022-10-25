@@ -1,5 +1,4 @@
 import React from "react";
-
 import {
   Card,
   CardContent,
@@ -14,7 +13,7 @@ import {
 } from "@mui/material";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import CruellaPop from "../assets/cruella1.jpg";
+import CruellaPop from "../../images/cruella1.jpg";
 
 const PopProduct = () => {
   return (
