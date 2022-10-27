@@ -16,6 +16,7 @@ const NavBar = () => {
         underline='hover'
         color='inherit'
         href='#'
+        // href="http://localhost:3000/products/new"
         sx={{ fontFamily: "Lobster, cursive", fontSize: 30 }}
       >
         New

@@ -14,6 +14,7 @@ import {
 import pop1 from "../../images/cruella1.jpg";
 
 const PopProductPage = () => {
+  //get a specific product
   return (
     <Stack direction='column' spacing={5}>
       <MainHeader />

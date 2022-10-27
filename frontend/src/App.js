@@ -8,6 +8,7 @@ import LoginPage from "./user/pages/LoginPage";
 import ProductCarousel from "./product/components/ProductCarousel";
 import PopProduct from "./product/components/PopProduct";
 
+//<ProductListPage type={new}>
 function App() {
   return <HomePage />;
 }

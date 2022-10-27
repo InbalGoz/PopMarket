@@ -15,21 +15,53 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import CruellaPop from "../../images/cruella1.jpg";
 
-const PopProduct = () => {
+//redux
+import { useSelector, useDispatch } from "react-redux";
+
+//get a specific peoduct and handle the actions
+const PopProduct = ({ popProduct }) => {
+  const dispatch = useDispatch();
   return (
-    <Card sx={{ maxWidth: 345 }}>
+    <Card
+      sx={{
+        maxWidth: 350,
+        minWidth: 350,
+        maxHeight: 440,
+        minHeight: 440,
+        // backgroundColor: "red",
+      }}
+    >
       <CardActionArea>
-        <CardMedia component='img' height='240' src={CruellaPop}></CardMedia>
+        <CardMedia
+          component='img'
+          height='240'
+          width='345'
+          src={popProduct.image}
+          //sx={{ maxHeight: 240, minHeight: 240 }}
+        ></CardMedia>
         <CardContent style={{ fontFamily: "Lobster, cursive" }}>
-          <Typography gutterBottom variant='h6' component='div'>
-            Pop Disney: Villains Cruella De Vil Vinyl Figure
+          <Typography
+            gutterBottom
+            variant='h6'
+            component='div'
+            sx={{ height: 50, mb: 2 }}
+          >
+            {popProduct.name}
           </Typography>
 
-          <Typography variant='body2' color='text.secondary'>
-            Pop 736 - Diamond Collection Exclusive
+          <Typography
+            variant='body2'
+            color='text.secondary'
+            sx={{ mb: 1, height: 30 }}
+          >
+            {popProduct.collectionNumber}
           </Typography>
-          <Stack>
-            <Rating name='half-rating' defaultValue={2.5} precision={0.5} />
+          <Stack sx={{ height: 15 }}>
+            <Rating
+              name='half-rating'
+              defaultValue={popProduct.rating}
+              precision={0.5}
+            />
           </Stack>
         </CardContent>
       </CardActionArea>
@@ -50,4 +82,5 @@ export default PopProduct;
 /*
  // rating + number of reviews?
  price
+ 
 */

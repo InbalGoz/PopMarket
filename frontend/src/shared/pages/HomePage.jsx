@@ -8,7 +8,7 @@ import Footer from "../components/Footer";
 
 const HomePage = () => {
   return (
-    <Stack direction='column' spacing={2}>
+    <Stack direction='column' spacing={3}>
       <MainHeader />
       <NavBar />
       <Box

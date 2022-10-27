@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import MainHeader from "../../shared/components/Navigaition/MainHeader";
 import NavBar from "../../shared/components/Navigaition/NavBar";
 import Footer from "../../shared/components/Footer";
@@ -9,9 +9,25 @@ import bss from "../../images/pic01.jpg";
 
 //should have props - get a specific list of products
 //get the header for the
+//props - (new/specific)
+
+//redux
+import { useSelector, useDispatch } from "react-redux";
+import { fetchProducts } from "../../redux/slices/productSlice";
+
+//if ...=='new' then show all the new peoducts
 
 //return a list of boxes for the list of the products
-const ProductListPage = () => {
+const ProductListPage = ({ type }) => {
+  const dispatch = useDispatch();
+  const { products } = useSelector((state) => state.product);
+
+  useEffect(() => {
+    // if(type == "New"){}
+    //dispatch(fetchNewProducts());
+    //}
+  }, []);
+
   return (
     <Stack
       direction='column'
@@ -64,63 +80,11 @@ const ProductListPage = () => {
               maxWidth: 1450,
             }}
           >
-            <Box sx={{ m: 1 }}>
-              <PopProduct />
-            </Box>
-            <Box sx={{ m: 1 }}>
-              <PopProduct />
-            </Box>
-            <Box sx={{ m: 1 }}>
-              <PopProduct />
-            </Box>
-            <Box sx={{ m: 1 }}>
-              <PopProduct />
-            </Box>
-            <Box sx={{ m: 1 }}>
-              <PopProduct />
-            </Box>
-            <Box sx={{ m: 1 }}>
-              <PopProduct />
-            </Box>
-            <Box sx={{ m: 1 }}>
-              <PopProduct />
-            </Box>
-            <Box sx={{ m: 1 }}>
-              <PopProduct />
-            </Box>
-            <Box sx={{ m: 1 }}>
-              <PopProduct />
-            </Box>
-            <Box sx={{ m: 1 }}>
-              <PopProduct />
-            </Box>
-            <Box sx={{ m: 1 }}>
-              <PopProduct />
-            </Box>
-            <Box sx={{ m: 1 }}>
-              <PopProduct />
-            </Box>
-            <Box sx={{ m: 1 }}>
-              <PopProduct />
-            </Box>
-            <Box sx={{ m: 1 }}>
-              <PopProduct />
-            </Box>
-            <Box sx={{ m: 1 }}>
-              <PopProduct />
-            </Box>
-            <Box sx={{ m: 1 }}>
-              <PopProduct />
-            </Box>
-            <Box sx={{ m: 1 }}>
-              <PopProduct />
-            </Box>
-            <Box sx={{ m: 1 }}>
-              <PopProduct />
-            </Box>
-            <Box sx={{ m: 1 }}>
-              <PopProduct />
-            </Box>
+            {products.map((product, index) => (
+              <Box sx={{ m: 1 }}>
+                <PopProduct key={index} popProduct={product} />
+              </Box>
+            ))}
           </Box>
         </Box>
       </Box>

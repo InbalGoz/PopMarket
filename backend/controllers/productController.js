@@ -5,7 +5,16 @@ import Product from "../models/productModel.js";
 // @route   GET /api/products
 // @access  Public
 const getProducts = asyncHandler(async (req, res) => {
-  const pageSize = 10;
+  const products = await Product.find();
+
+  res.status(201).json(products);
+
+  // const products = await Product.find({});
+  console.log(products);
+
+  // return res.send({ status: true, products });
+
+  /* const pageSize = 10;
   const page = Number(req.query.pageNumber) || 1;
 
   const keyword = req.query.keyword
@@ -22,7 +31,7 @@ const getProducts = asyncHandler(async (req, res) => {
     .limit(pageSize)
     .skip(pageSize * (page - 1));
 
-  res.json({ products, page, pages: Math.ceil(count / pageSize) });
+  res.json({ products, page, pages: Math.ceil(count / pageSize) });*/
 });
 
 // @desc    Fetch single product
@@ -53,6 +62,8 @@ const deleteProduct = asyncHandler(async (req, res) => {
     throw new Error("Product not found");
   }
 });
+
+/*
 
 // @desc    Create a product
 // @route   POST /api/products
@@ -149,13 +160,14 @@ const getTopProducts = asyncHandler(async (req, res) => {
 
   res.json(products);
 });
+*/
 
 export {
   getProducts,
   getProductById,
   deleteProduct,
-  createProduct,
-  updateProduct,
-  createProductReview,
-  getTopProducts,
+  // createProduct,
+  // updateProduct,
+  // createProductReview,
+  //getTopProducts,
 };
