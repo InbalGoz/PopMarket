@@ -3,8 +3,13 @@ import { productService } from "../../services/productService";
 
 const initialState = {
   products: [],
+  productList: [],
+  // newProducts: [],
+  // popularProducts: [],
+  //specialProducts: [],
+  // otherProducts: [],
   product: null,
-  isLoading: false,
+  loading: true,
   error: "",
 };
 
@@ -13,26 +18,53 @@ export const productSlice = createSlice({
   initialState,
   extraReducers: (builder) => {
     builder
-      .addCase(fetchProducts.pending, (state, action) => {
-        state.isLoading = true;
+      .addCase(fetchAllProducts.pending, (state) => {
+        state.loading = true;
       })
-      .addCase(fetchProducts.fulfilled, (state, action) => {
-        console.log("product action", action);
+      .addCase(fetchAllProducts.fulfilled, (state, action) => {
+        state.loading = false;
         state.products = action.payload;
-        state.isLoading = false;
+      })
+      .addCase(fetchPopularProducts.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(fetchPopularProducts.fulfilled, (state, action) => {
+        state.loading = false;
+        state.productList = action.payload;
+      })
+      .addCase(fetchNewProducts.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(fetchNewProducts.fulfilled, (state, action) => {
+        state.loading = false;
+        state.productList = action.payload;
+      })
+      .addCase(fetchSpecialProducts.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(fetchSpecialProducts.fulfilled, (state, action) => {
+        state.loading = false;
+        state.productList = action.payload;
+      })
+      .addCase(fetchOtherProducts.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(fetchOtherProducts.fulfilled, (state, action) => {
+        state.loading = false;
+        state.productList = action.payload;
       })
       .addCase(fetchProduct.pending, (state, action) => {
-        state.isLoading = true;
+        state.loading = true;
       })
       .addCase(fetchProduct.fulfilled, (state, action) => {
-        state.isLoading = false;
+        state.loading = false;
         state.product = action.payload;
       })
       .addCase(deleteProduct.pending, (state, action) => {
-        state.isLoading = true;
+        state.loading = true;
       })
       .addCase(deleteProduct.fulfilled, (state, action) => {
-        state.isLoading = false;
+        state.loading = false;
         const newProductArr = state.products.filter(
           (product) => product.id !== action.payload
         );
@@ -44,11 +76,53 @@ export const productSlice = createSlice({
 });
 
 //fetching products using build in thunk on toolkit
-export const fetchProducts = createAsyncThunk("products/fetch", async () => {
-  const data = await productService.getAllProducts();
-  console.log("res slice", data);
-  return data;
-});
+export const fetchAllProducts = createAsyncThunk(
+  "products/fetchAll",
+  async () => {
+    const data = await productService.getAllProducts();
+    console.log("res slice", data);
+    return data;
+  }
+);
+
+//fetching Popular products using build in thunk on toolkit
+export const fetchPopularProducts = createAsyncThunk(
+  "products/fetchpopular",
+  async () => {
+    const data = await productService.getPopularProducts();
+    return data;
+  }
+);
+
+//fetching products using build in thunk on toolkit
+export const fetchOtherProducts = createAsyncThunk(
+  "products/fetchother",
+  async () => {
+    const data = await productService.getOtherProducts();
+    console.log("res slice", data);
+    return data;
+  }
+);
+
+//fetching products using build in thunk on toolkit
+export const fetchNewProducts = createAsyncThunk(
+  "products/fetchnew",
+  async () => {
+    const data = await productService.getNewProducts();
+    console.log("res slice", data);
+    return data;
+  }
+);
+
+//fetching products using build in thunk on toolkit
+export const fetchSpecialProducts = createAsyncThunk(
+  "products/fetchspecial",
+  async () => {
+    const data = await productService.getSpecialProducts();
+    console.log("res slice", data);
+    return data;
+  }
+);
 
 //fetching product using build in thunk on toolkit
 export const fetchProduct = createAsyncThunk("products/fetchById", async () => {

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Card,
   CardContent,
@@ -17,10 +17,33 @@ import CruellaPop from "../../images/cruella1.jpg";
 
 //redux
 import { useSelector, useDispatch } from "react-redux";
+import { addToWishList } from "../../redux/slices/wishListSlice";
 
 //get a specific peoduct and handle the actions
 const PopProduct = ({ popProduct }) => {
+  const [click, setClick] = useState(false);
   const dispatch = useDispatch();
+
+  const handleFavoriteClick = () => {
+    if (click) {
+      handleRemoveFromWishList();
+    } else {
+      handleAddToWishList();
+    }
+  };
+
+  const handleAddToWishList = () => {
+    console.log("click", click);
+    setClick(true);
+    dispatch(addToWishList());
+  };
+
+  const handleRemoveFromWishList = () => {
+    console.log("click", click);
+    setClick(false);
+    dispatch(addToWishList());
+  };
+
   return (
     <Card
       sx={{
@@ -62,11 +85,12 @@ const PopProduct = ({ popProduct }) => {
               defaultValue={popProduct.rating}
               precision={0.5}
             />
+            <Box sx={{ ml: 2 }}>hello</Box>
           </Stack>
         </CardContent>
       </CardActionArea>
       <CardActions>
-        <IconButton aria-label='add to favorites'>
+        <IconButton aria-label='add to favorites' onClick={handleFavoriteClick}>
           <FavoriteIcon />
         </IconButton>
         <IconButton aria-label='add to favorites'>

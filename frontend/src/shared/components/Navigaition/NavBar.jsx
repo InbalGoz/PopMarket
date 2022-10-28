@@ -1,7 +1,8 @@
 import React from "react";
-import { Box, Stack, Link } from "@mui/material";
+import { Box, Stack, Link, Typography } from "@mui/material";
+import { Link as Linker } from "react-router-dom";
 
-const preventDefault = (event) => event.preventDefault();
+//const preventDefault = (event) => event.preventDefault();
 
 const NavBar = () => {
   return (
@@ -11,43 +12,56 @@ const NavBar = () => {
       alignItems='center'
       spacing={7}
     >
-      <Link
-        variant='h5'
-        underline='hover'
-        color='inherit'
-        href='#'
-        // href="http://localhost:3000/products/new"
-        sx={{ fontFamily: "Lobster, cursive", fontSize: 30 }}
+      <Linker
+        to='/newproducts'
+        // underline='hover'
+        style={{
+          color: "black",
+          textDecoration: "none",
+          fontFamily: "Lobster, cursive",
+          fontSize: 30,
+        }}
       >
         New
-      </Link>
-      <Link
-        variant='h5'
+      </Linker>
+
+      <Linker
+        to='/popularproducts'
         underline='hover'
-        color='inherit'
-        href='#'
-        sx={{ fontFamily: "Lobster, cursive", fontSize: 30 }}
+        style={{
+          color: "black",
+          textDecoration: "none",
+          fontFamily: "Lobster, cursive",
+          fontSize: 30,
+        }}
       >
         Popular
-      </Link>
-      <Link
-        variant='h5'
-        underline='hover'
-        color='inherit'
-        href='#'
-        sx={{ fontFamily: "Lobster, cursive", fontSize: 30 }}
+      </Linker>
+
+      <Linker
+        to='/speicalproducts'
+        style={{
+          color: "black",
+          textDecoration: "none",
+          fontFamily: "Lobster, cursive",
+          fontSize: 30,
+        }}
       >
         Special Edition
-      </Link>
-      <Link
-        variant='h5'
+      </Linker>
+
+      <Linker
+        to='/moreproducts'
         underline='hover'
-        color='inherit'
-        href='#'
-        sx={{ fontFamily: "Lobster, cursive", fontSize: 30 }}
+        style={{
+          color: "black",
+          textDecoration: "none",
+          fontFamily: "Lobster, cursive",
+          fontSize: 30,
+        }}
       >
         More
-      </Link>
+      </Linker>
     </Stack>
   );
 };

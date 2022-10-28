@@ -162,10 +162,42 @@ const getTopProducts = asyncHandler(async (req, res) => {
 });
 */
 
+// @desc    Get top rated products
+// @route   GET /api/products/top
+// @access  Public
+const getPopularProducts = asyncHandler(async (req, res) => {
+  const products = await Product.find({}).sort({ rating: -1 }).limit(3);
+
+  res.json(products);
+});
+
+const getOtherProducts = asyncHandler(async (req, res) => {
+  const products = await Product.find({ collectionType: { $eq: "Other" } });
+
+  res.json(products);
+});
+
+const getSpecialProducts = asyncHandler(async (req, res) => {
+  const products = await Product.find({
+    collectionType: { $eq: "Special Edition" },
+  });
+  res.json(products);
+});
+
+const getNewProducts = asyncHandler(async (req, res) => {
+  const products = await Product.find().sort({ createdAt: -1 }).limit(1);
+  console.log("new", products);
+  res.json(products);
+});
+
 export {
   getProducts,
   getProductById,
   deleteProduct,
+  getPopularProducts,
+  getOtherProducts,
+  getSpecialProducts,
+  getNewProducts,
   // createProduct,
   // updateProduct,
   // createProductReview,

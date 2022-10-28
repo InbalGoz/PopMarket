@@ -1,12 +1,14 @@
-import React, { useState, useEffect } from "react";
-import { Box, Paper, Button, Stack, Typography } from "@mui/material";
+import React, { useEffect } from "react";
+import { Box, Stack, Typography } from "@mui/material";
+import Message from "../../shared/components/Message";
+import Loader from "../../shared/components/Loader";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import PopProduct from "./PopProduct";
 
 //redux
 import { useSelector, useDispatch } from "react-redux";
-import { fetchProducts } from "../../redux/slices/productSlice"; //action
+import { fetchAllProducts } from "../../redux/slices/productSlice"; //action
 
 //need to show a list of the most new pops
 // A slider of the newest pop that ws added to the shop, orderd by adding date.
@@ -25,21 +27,23 @@ const responsive = {
 //only gets the list of products
 const ProductCarousel = () => {
   const dispatch = useDispatch();
-  const { products } = useSelector((state) => state.product);
+  const { loading, error, products } = useSelector((state) => state.product);
 
   useEffect(() => {
-    dispatch(fetchProducts());
+    dispatch(fetchAllProducts());
   }, []);
 
-  console.log("products", products);
-
-  return (
+  return loading ? (
+    <Loader />
+  ) : error ? (
+    <Message />
+  ) : (
     <Stack spacing={3}>
       <Box margin={1} />
       <Carousel responsive={responsive} partialVisible infinite>
         {products.map((product, index) => (
-          <div>
-            <PopProduct key={index} popProduct={product} />
+          <div key={index}>
+            <PopProduct popProduct={product} />
           </div>
         ))}
       </Carousel>
@@ -48,14 +52,6 @@ const ProductCarousel = () => {
 };
 
 export default ProductCarousel;
-
-/*
- {popCarouselList.map((product) => (
-          <div>
-            <PopProduct key={product.id} popProduct={product} />
-          </div>
-        ))}
-*/
 
 /*
 <Typography

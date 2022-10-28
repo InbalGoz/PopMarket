@@ -2,7 +2,7 @@ const products = [
   {
     image: "/images/cruella1.jpg",
     name: "Pop Disney: Villains Cruella De Vil Vinyl",
-    collectionType: "Spaciel Edition",
+    collectionType: "Special Edition",
     collectionNumber: "Pop 736 - Diamond Collection Exclusive",
     dimensions: "",
     weight: "",
@@ -15,7 +15,7 @@ const products = [
   {
     image: "/images/pop_TheBeast.jpg",
     name: "Pop Disney: Beauty & The Beast-Winter Beast Action Figure",
-    collectionType: "Disney",
+    collectionType: "Other",
     collectionNumber: "Pop 239",
     dimensions: `3"L x 3"W x 3.75"H`,
     weight: "",
@@ -28,7 +28,7 @@ const products = [
   {
     image: "/images/pop_theArrow.jpg",
     name: "Pop Television: The Arrow Unmasked",
-    collectionType: "Television",
+    collectionType: "Special Edition",
     collectionNumber: "Pop 208 : Collection Exclusive",
     dimensions: `6.3"L x 4.13"W x 3.54"H`,
     weight: "",
@@ -41,7 +41,7 @@ const products = [
   {
     image: "/images/pop_RemusLupin.jpg",
     name: "Pop Movies : Harry Potter-Remus Lupin Toy, Multicolor",
-    collectionType: "Movies",
+    collectionType: "Other",
     collectionNumber: "Pop 45 ",
     dimensions: ``,
     weight: "",
@@ -54,7 +54,7 @@ const products = [
   {
     image: "/images/pop_hermioneGrangerjpg",
     name: "Pop Movies : Harry Potter- Hermione Granger",
-    collectionType: "Movies",
+    collectionType: "Other",
     collectionNumber: "Pop 03 ",
     dimensions: ``,
     weight: "",
@@ -67,7 +67,7 @@ const products = [
   {
     image: "/images/pop_spidergwen.jpg",
     name: "Pop Vinyl Figure : Spider-Gwen Unhooded",
-    collectionType: "Vinyl Figure",
+    collectionType: "Special Edition",
     collectionNumber: "Pop 153 - (Hot Topic Exc) ",
     dimensions: `2.5"L x 2.5"W x 3.75"H`,
     weight: "",
@@ -80,7 +80,7 @@ const products = [
   {
     image: "/images/pop_BJPenn.jpg",
     name: "Pop UFC : BJ Penn",
-    collectionType: "UFC",
+    collectionType: "Other",
     collectionNumber: "Pop 06 ",
     dimensions: `2.5"L x 2.5"W x 3.75"H`,
     weight: "0.1 Kilograms",

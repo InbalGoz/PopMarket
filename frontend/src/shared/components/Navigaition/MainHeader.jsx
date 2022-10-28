@@ -1,18 +1,13 @@
 import React from "react";
 import {
   Box,
-  Stack,
-  Grid,
   AppBar,
   Typography,
   IconButton,
   Badge,
-  MenuItem,
-  Menu,
-  Button,
   Toolbar,
-  InputBase,
 } from "@mui/material";
+import { Link } from "react-router-dom";
 import PersonIcon from "@mui/icons-material/Person";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import ShoppingBagIcon from "@mui/icons-material/ShoppingBag";
@@ -28,31 +23,54 @@ const HomeHeader = () => {
             textAlign='center'
             sx={{ flexGrow: 1, fontFamily: "Lobster, cursive", ml: 15 }}
           >
-            Pop Market
+            <Link
+              to='/'
+              style={{
+                color: "black",
+                textDecoration: "none",
+              }}
+            >
+              Pop Market
+            </Link>
           </Typography>
 
           <Box sx={{ display: { xs: "none", md: "flex" } }}>
             <IconButton size='large' color='inherit'>
               <PersonIcon />
             </IconButton>
-            <IconButton
-              size='large'
-              aria-label='show 17 new favorites'
-              color='inherit'
+
+            <Link
+              to='/wishList'
+              style={{
+                color: "black",
+              }}
             >
-              <Badge badgeContent={17} color='error'>
-                <FavoriteBorderIcon />
-              </Badge>
-            </IconButton>
-            <IconButton
-              size='large'
-              aria-label='show 17 new products'
-              color='inherit'
+              <IconButton
+                size='large'
+                aria-label='show 17 new favorites'
+                color='inherit'
+              >
+                <Badge badgeContent={17} color='error'>
+                  <FavoriteBorderIcon />
+                </Badge>
+              </IconButton>
+            </Link>
+            <Link
+              to='/shoppingCart'
+              style={{
+                color: "black",
+              }}
             >
-              <Badge badgeContent={17} color='error'>
-                <ShoppingBagIcon />
-              </Badge>
-            </IconButton>
+              <IconButton
+                size='large'
+                aria-label='show 17 new products'
+                color='inherit'
+              >
+                <Badge badgeContent={17} color='error'>
+                  <ShoppingBagIcon />
+                </Badge>
+              </IconButton>
+            </Link>
           </Box>
         </Toolbar>
       </AppBar>
