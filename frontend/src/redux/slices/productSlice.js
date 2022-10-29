@@ -8,7 +8,7 @@ const initialState = {
   // popularProducts: [],
   //specialProducts: [],
   // otherProducts: [],
-  product: null,
+  product: {},
   loading: true,
   error: "",
 };
@@ -58,6 +58,15 @@ export const productSlice = createSlice({
       })
       .addCase(fetchProduct.fulfilled, (state, action) => {
         state.loading = false;
+        console.log("acrionn product", action.payload);
+        state.product = action.payload;
+      })
+      .addCase(updateProduct.pending, (state, action) => {
+        state.loading = true;
+      })
+      .addCase(updateProduct.fulfilled, (state, action) => {
+        state.loading = false;
+        console.log("updated", action.payload);
         state.product = action.payload;
       })
       .addCase(deleteProduct.pending, (state, action) => {
@@ -80,7 +89,7 @@ export const fetchAllProducts = createAsyncThunk(
   "products/fetchAll",
   async () => {
     const data = await productService.getAllProducts();
-    console.log("res slice", data);
+
     return data;
   }
 );
@@ -99,7 +108,7 @@ export const fetchOtherProducts = createAsyncThunk(
   "products/fetchother",
   async () => {
     const data = await productService.getOtherProducts();
-    console.log("res slice", data);
+
     return data;
   }
 );
@@ -109,7 +118,7 @@ export const fetchNewProducts = createAsyncThunk(
   "products/fetchnew",
   async () => {
     const data = await productService.getNewProducts();
-    console.log("res slice", data);
+
     return data;
   }
 );
@@ -119,16 +128,31 @@ export const fetchSpecialProducts = createAsyncThunk(
   "products/fetchspecial",
   async () => {
     const data = await productService.getSpecialProducts();
-    console.log("res slice", data);
+
     return data;
   }
 );
 
 //fetching product using build in thunk on toolkit
-export const fetchProduct = createAsyncThunk("products/fetchById", async () => {
-  const res = await productService.getProduct();
-  return res.data;
-});
+export const fetchProduct = createAsyncThunk(
+  "products/fetchById",
+  async (productId) => {
+    const res = await productService.getProduct(productId);
+    console.log("res fetch", res);
+    return res;
+  }
+);
+
+//update product using build in thunk on toolkit
+export const updateProduct = createAsyncThunk(
+  "products/updateById",
+  async (newProduct) => {
+    const res = await productService.updateProduct(newProduct);
+
+    console.log("ress updtae", res);
+    return res;
+  }
+);
 
 export const deleteProduct = createAsyncThunk(
   "products/deleteById",

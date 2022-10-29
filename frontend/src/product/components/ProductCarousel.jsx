@@ -8,7 +8,10 @@ import PopProduct from "./PopProduct";
 
 //redux
 import { useSelector, useDispatch } from "react-redux";
-import { fetchAllProducts } from "../../redux/slices/productSlice"; //action
+import {
+  fetchAllProducts,
+  fetchPopularProducts,
+} from "../../redux/slices/productSlice"; //action
 
 //need to show a list of the most new pops
 // A slider of the newest pop that ws added to the shop, orderd by adding date.
@@ -27,10 +30,10 @@ const responsive = {
 //only gets the list of products
 const ProductCarousel = () => {
   const dispatch = useDispatch();
-  const { loading, error, products } = useSelector((state) => state.product);
+  const { loading, error, productList } = useSelector((state) => state.product);
 
   useEffect(() => {
-    dispatch(fetchAllProducts());
+    dispatch(fetchPopularProducts());
   }, []);
 
   return loading ? (
@@ -41,7 +44,7 @@ const ProductCarousel = () => {
     <Stack spacing={3}>
       <Box margin={1} />
       <Carousel responsive={responsive} partialVisible infinite>
-        {products.map((product, index) => (
+        {productList.map((product, index) => (
           <div key={index}>
             <PopProduct popProduct={product} />
           </div>

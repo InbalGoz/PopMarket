@@ -27,6 +27,7 @@ const App = () => {
           <Route path='popularproducts' element={<PopularProducts />} />
           <Route path='speicalproducts' element={<SpecialProducts />} />
           <Route path='moreproducts' element={<OtherProducts />} />
+          <Route path='product/:id' element={<PopProductPage />} />
           <Route path='wishList' element={<WishListPage />} />
         </Routes>
       </div>

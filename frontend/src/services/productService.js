@@ -11,6 +11,7 @@ export const productService = {
   getNewProducts,
   getSpecialProducts,
   getOtherProducts,
+  updateProduct,
 };
 
 async function getAllProducts() {
@@ -44,7 +45,16 @@ async function getOtherProducts() {
 }
 
 async function getProduct(productId) {
-  const res = await axios.get(`${BASE_URL}/${productId}`);
+  const res = await axios.get(`${BASE_URL}/product/${productId}`);
+
+  return res.data;
+}
+
+async function updateProduct(newProduct) {
+  const res = await axios.put(
+    `${BASE_URL}/editProduct/${newProduct.id}`,
+    newProduct
+  );
   return res.data;
 }
 

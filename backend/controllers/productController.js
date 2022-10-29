@@ -10,7 +10,6 @@ const getProducts = asyncHandler(async (req, res) => {
   res.status(201).json(products);
 
   // const products = await Product.find({});
-  console.log(products);
 
   // return res.send({ status: true, products });
 
@@ -48,6 +47,49 @@ const getProductById = asyncHandler(async (req, res) => {
   }
 });
 
+// @desc    Update a product
+// @route   PUT /api/products/:id
+// @access  Private/Admin
+const updateProduct = asyncHandler(async (req, res) => {
+  console.log("req", req.body);
+  const {
+    id,
+    image,
+    name,
+    collectionType,
+    collectionNumber,
+    dimensions,
+    weight,
+    nameOfSeller,
+    rating,
+    price,
+    countInStock,
+  } = req.body;
+
+  const product = await Product.findById(req.body.id);
+
+  console.log("is product?", product);
+
+  if (product) {
+    product.image = image;
+    product.name = name;
+    product.collectionType = collectionType;
+    product.collectionNumber = collectionNumber;
+    product.dimensions = dimensions;
+    product.weight = weight;
+    product.nameOfSeller = nameOfSeller;
+    product.rating = rating;
+    product.price = price;
+    product.countInStock = countInStock;
+
+    const updatedProduct = await product.save();
+    res.json(updatedProduct);
+  } else {
+    res.status(404);
+    throw new Error("Product not found");
+  }
+});
+
 // @desc    Delete a product
 // @route   DELETE /api/products/:id
 // @access  Private/Admin
@@ -62,6 +104,45 @@ const deleteProduct = asyncHandler(async (req, res) => {
     throw new Error("Product not found");
   }
 });
+
+// @desc    Get top rated products
+// @route   GET /api/products/top
+// @access  Public
+const getPopularProducts = asyncHandler(async (req, res) => {
+  const products = await Product.find({}).sort({ rating: -1 }).limit(4);
+  res.json(products);
+});
+
+const getOtherProducts = asyncHandler(async (req, res) => {
+  const products = await Product.find({ collectionType: { $eq: "Other" } });
+  res.json(products);
+});
+
+const getSpecialProducts = asyncHandler(async (req, res) => {
+  const products = await Product.find({
+    collectionType: { $eq: "Special Edition" },
+  });
+  res.json(products);
+});
+
+const getNewProducts = asyncHandler(async (req, res) => {
+  const products = await Product.find().sort({ createdAt: -1 }).limit(3);
+  res.json(products);
+});
+
+export {
+  getProducts,
+  getProductById,
+  deleteProduct,
+  getPopularProducts,
+  getOtherProducts,
+  getSpecialProducts,
+  getNewProducts,
+  // createProduct,
+  updateProduct,
+  // createProductReview,
+  //getTopProducts,
+};
 
 /*
 
@@ -85,31 +166,7 @@ const createProduct = asyncHandler(async (req, res) => {
   res.status(201).json(createdProduct);
 });
 
-// @desc    Update a product
-// @route   PUT /api/products/:id
-// @access  Private/Admin
-const updateProduct = asyncHandler(async (req, res) => {
-  const { name, price, description, image, brand, category, countInStock } =
-    req.body;
 
-  const product = await Product.findById(req.params.id);
-
-  if (product) {
-    product.name = name;
-    product.price = price;
-    product.description = description;
-    product.image = image;
-    product.brand = brand;
-    product.category = category;
-    product.countInStock = countInStock;
-
-    const updatedProduct = await product.save();
-    res.json(updatedProduct);
-  } else {
-    res.status(404);
-    throw new Error("Product not found");
-  }
-});
 
 // @desc    Create new review
 // @route   POST /api/products/:id/reviews
@@ -161,45 +218,3 @@ const getTopProducts = asyncHandler(async (req, res) => {
   res.json(products);
 });
 */
-
-// @desc    Get top rated products
-// @route   GET /api/products/top
-// @access  Public
-const getPopularProducts = asyncHandler(async (req, res) => {
-  const products = await Product.find({}).sort({ rating: -1 }).limit(3);
-
-  res.json(products);
-});
-
-const getOtherProducts = asyncHandler(async (req, res) => {
-  const products = await Product.find({ collectionType: { $eq: "Other" } });
-
-  res.json(products);
-});
-
-const getSpecialProducts = asyncHandler(async (req, res) => {
-  const products = await Product.find({
-    collectionType: { $eq: "Special Edition" },
-  });
-  res.json(products);
-});
-
-const getNewProducts = asyncHandler(async (req, res) => {
-  const products = await Product.find().sort({ createdAt: -1 }).limit(1);
-  console.log("new", products);
-  res.json(products);
-});
-
-export {
-  getProducts,
-  getProductById,
-  deleteProduct,
-  getPopularProducts,
-  getOtherProducts,
-  getSpecialProducts,
-  getNewProducts,
-  // createProduct,
-  // updateProduct,
-  // createProductReview,
-  //getTopProducts,
-};

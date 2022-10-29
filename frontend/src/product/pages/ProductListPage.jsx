@@ -30,28 +30,28 @@ const ProductListPage = () => {
   const location = useLocation();
 
   const dispatch = useDispatch();
-  const {
-    loading,
-    popularProducts,
-    newProducts,
-    specialProducts,
-    otherProducts,
-    productList,
-  } = useSelector((state) => state.product);
+  const { loading, productList } = useSelector((state) => state.product);
 
   useEffect(() => {
     if (location.pathname === "/popularproducts") {
       dispatch(fetchPopularProducts());
     } else if (location.pathname === "/newproducts") {
       dispatch(fetchNewProducts());
-      console.log("new", newProducts);
     } else if (location.pathname === "/speicalproducts") {
       dispatch(fetchSpecialProducts());
-      console.log("getspecial", specialProducts);
     } else {
       dispatch(fetchOtherProducts());
     }
   }, [dispatch]);
+
+  const header =
+    location.pathname === "/popularproducts"
+      ? "Popular Pops"
+      : location.pathname === "/newproducts"
+      ? "New Pops"
+      : location.pathname === "/speicalproducts"
+      ? "Special Pops"
+      : "Other types Pops";
 
   return (
     <Stack
@@ -85,7 +85,7 @@ const ProductListPage = () => {
               textAlign: "center",
             }}
           >
-            The Newest Pop:by date
+            {header}
           </Typography>
         </Box>
         <Box
