@@ -4,11 +4,8 @@ import { productService } from "../../services/productService";
 const initialState = {
   products: [],
   productList: [],
-  // newProducts: [],
-  // popularProducts: [],
-  //specialProducts: [],
-  // otherProducts: [],
   product: {},
+  clickedFavorite: false,
   loading: true,
   error: "",
 };
@@ -16,6 +13,11 @@ const initialState = {
 export const productSlice = createSlice({
   name: "product",
   initialState,
+  reducers: {
+    iconFavoriteClick(state, action) {
+      //state.clickedFavorite = !state.clickedFavorite;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchAllProducts.pending, (state) => {
@@ -23,6 +25,7 @@ export const productSlice = createSlice({
       })
       .addCase(fetchAllProducts.fulfilled, (state, action) => {
         state.loading = false;
+
         state.products = action.payload;
       })
       .addCase(fetchPopularProducts.pending, (state) => {
@@ -58,7 +61,7 @@ export const productSlice = createSlice({
       })
       .addCase(fetchProduct.fulfilled, (state, action) => {
         state.loading = false;
-        console.log("acrionn product", action.payload);
+        console.log("product", action.payload);
         state.product = action.payload;
       })
       .addCase(updateProduct.pending, (state, action) => {
@@ -66,7 +69,6 @@ export const productSlice = createSlice({
       })
       .addCase(updateProduct.fulfilled, (state, action) => {
         state.loading = false;
-        console.log("updated", action.payload);
         state.product = action.payload;
       })
       .addCase(deleteProduct.pending, (state, action) => {
@@ -89,7 +91,6 @@ export const fetchAllProducts = createAsyncThunk(
   "products/fetchAll",
   async () => {
     const data = await productService.getAllProducts();
-
     return data;
   }
 );
@@ -108,7 +109,6 @@ export const fetchOtherProducts = createAsyncThunk(
   "products/fetchother",
   async () => {
     const data = await productService.getOtherProducts();
-
     return data;
   }
 );
@@ -118,7 +118,6 @@ export const fetchNewProducts = createAsyncThunk(
   "products/fetchnew",
   async () => {
     const data = await productService.getNewProducts();
-
     return data;
   }
 );
@@ -128,7 +127,6 @@ export const fetchSpecialProducts = createAsyncThunk(
   "products/fetchspecial",
   async () => {
     const data = await productService.getSpecialProducts();
-
     return data;
   }
 );
@@ -138,7 +136,7 @@ export const fetchProduct = createAsyncThunk(
   "products/fetchById",
   async (productId) => {
     const res = await productService.getProduct(productId);
-    console.log("res fetch", res);
+
     return res;
   }
 );
@@ -161,6 +159,7 @@ export const deleteProduct = createAsyncThunk(
     return res.data;
   }
 );
+export const { iconFavoriteClick } = productSlice.actions;
 
 export default productSlice.reducer;
 

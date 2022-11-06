@@ -7,7 +7,6 @@ const ProductList = ({ productsList }) => {
 
   useEffect(() => {
     setProducts(productsList);
-    console.log("lidddt", productsList);
   }, [products]);
   return (
     <>

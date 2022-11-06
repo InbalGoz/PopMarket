@@ -4,6 +4,8 @@ import dotenv from "dotenv";
 import connectDB from "./config/db.js";
 import cors from "cors";
 import productRoutes from "./routes/productRoute.js";
+import cartRoutes from "./routes/cartRoute.js";
+import wishListRoutes from "./routes/wishListRoute.js";
 
 dotenv.config();
 
@@ -21,6 +23,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use("/api/products", productRoutes);
+app.use("/api/cart", cartRoutes);
+app.use("/api/wishList", wishListRoutes);
 
 /*
 //conecting to database

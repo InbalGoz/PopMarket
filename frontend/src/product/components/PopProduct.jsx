@@ -1,11 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Card,
   CardContent,
   CardMedia,
   Typography,
   Rating,
-  Stack,
   Box,
   IconButton,
   CardActionArea,
@@ -13,13 +12,22 @@ import {
 } from "@mui/material";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import { Link as RouterLink } from "react-router-dom";
+import { Link as RouterLink, useNavigate } from "react-router-dom";
 import CruellaPop from "../../images/cruella1.jpg";
 
 //redux
 import { useSelector, useDispatch } from "react-redux";
+import { addCartItem } from "../../redux/slices/cartSlice";
+import {
+  iconFavoriteClick,
+  updateProduct,
+  fetchProduct,
+} from "../../redux/slices/productSlice";
 
-import { addToWishList } from "../../redux/slices/wishListSlice";
+import {
+  addWishListItem,
+  removeWishListItem,
+} from "../../redux/slices/wishListSlice";
 
 const labels = {
   0.5: "Useless",
@@ -36,30 +44,54 @@ const labels = {
 
 //get a specific peoduct and handle the actions
 const PopProduct = ({ popProduct }) => {
-  const [click, setClick] = useState(false);
   const dispatch = useDispatch();
+  //const [clickFavorite, setClickFavorite] = useState(false);
+  const { loading, error, clickedFavorite, product } = useSelector(
+    (state) => state.product
+  );
 
-  const handleFavoriteClick = () => {
-    if (click) {
-      handleRemoveFromWishList();
-    } else {
-      handleAddToWishList();
-    }
+  useEffect(() => {
+    // dispatch(fetchProduct(popProductId));
+  }, []);
+
+  const addToWishListHandler = async () => {
+    // console.log("favorite", product.isFavorite);
+
+    /* const newProduct = {
+      id: popProduct._id,
+      image: popProduct.image,
+      name: popProduct.name,
+      collectionType: popProduct.collectionType,
+      collectionNumber: popProduct.collectionNumber,
+      dimensions: popProduct.dimensions,
+      weight: popProduct.weight,
+      nameOfSeller: popProduct.nameOfSeller,
+      rating: popProduct.rating,
+      numReviews: popProduct.numReviews,
+      price: popProduct.price,
+      countInStock: popProduct.countInStock,
+      isFavorite: !popProduct.isFavorite,
+    };
+    dispatch(updateProduct(newProduct));*/
+    // setClickFavorite(true);
+    //dispatch(iconFavoriteClick());
+    dispatch(addWishListItem(popProduct._id));
   };
 
-  const handleAddToWishList = () => {
-    console.log("click", click);
-    setClick(true);
-    dispatch(addToWishList());
+  const removeFromWishListHandler = () => {
+    // setClickFavorite(false);
+    dispatch(removeWishListItem(popProduct._id));
   };
 
-  const handleRemoveFromWishList = () => {
-    console.log("click", click);
-    setClick(false);
-    dispatch(addToWishList());
+  const addToCartHandler = () => {
+    //console.log("popProduct._id", popProduct._id);
+
+    dispatch(addCartItem(popProduct._id));
+    //message that the item as been added to the cart
+    //navigate(`/cart/${popProduct._id}`);
   };
 
-  console.log("dfd", window.location.pathname);
+  //console.log("dfd", window.location.pathname);
 
   return (
     <Card
@@ -122,10 +154,25 @@ const PopProduct = ({ popProduct }) => {
         </CardActionArea>
       </RouterLink>
       <CardActions>
-        <IconButton aria-label='add to favorites' onClick={handleFavoriteClick}>
-          <FavoriteIcon />
-        </IconButton>
-        <IconButton aria-label='add to favorites'>
+        {(!popProduct.isFavorite && (
+          <IconButton
+            aria-label='add to favorites'
+            onClick={addToWishListHandler}
+          >
+            <FavoriteIcon />
+          </IconButton>
+        )) ||
+          (popProduct.isFavorite && (
+            <IconButton
+              color='warning'
+              aria-label='add to favorites'
+              onClick={removeFromWishListHandler}
+            >
+              <FavoriteIcon />
+            </IconButton>
+          ))}
+
+        <IconButton aria-label='add to favorites' onClick={addToCartHandler}>
           <ShoppingCartIcon />
         </IconButton>
       </CardActions>
@@ -138,6 +185,10 @@ export default PopProduct;
 /*
  // rating + number of reviews?
  price
+
+  <IconButton aria-label='add to favorites'>
+          <ShoppingCartIcon />
+        </IconButton>
  
 */
 

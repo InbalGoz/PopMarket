@@ -34,7 +34,9 @@ const ProductCarousel = () => {
 
   useEffect(() => {
     dispatch(fetchPopularProducts());
-  }, []);
+  }, [dispatch]);
+
+  console.log("fetchPopularProducts", productList);
 
   return loading ? (
     <Loader />

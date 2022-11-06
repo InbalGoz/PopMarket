@@ -70,6 +70,9 @@ const productSchema = mongoose.Schema(
       required: true,
       default: 0,
     },
+    isFavorite: {
+      type: Boolean,
+    },
   },
   {
     timestamps: true,

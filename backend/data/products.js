@@ -11,6 +11,7 @@ const products = [
     numReviews: 0,
     price: 89.99,
     countInStock: 3,
+    isFavorite: false,
   },
   {
     image: "/images/pop_TheBeast.jpg",
@@ -23,7 +24,8 @@ const products = [
     rating: 0,
     numReviews: 0,
     price: 19.99,
-    countInStock: 3,
+    countInStock: 0,
+    isFavorite: false,
   },
   {
     image: "/images/pop_theArrow.jpg",
@@ -37,6 +39,7 @@ const products = [
     numReviews: 0,
     price: 19.99,
     countInStock: 3,
+    isFavorite: false,
   },
   {
     image: "/images/pop_RemusLupin.jpg",
@@ -50,6 +53,7 @@ const products = [
     numReviews: 0,
     price: 19.99,
     countInStock: 3,
+    isFavorite: false,
   },
   {
     image: "/images/pop_hermioneGrangerjpg",
@@ -63,6 +67,7 @@ const products = [
     numReviews: 0,
     price: 19.99,
     countInStock: 3,
+    isFavorite: false,
   },
   {
     image: "/images/pop_spidergwen.jpg",
@@ -76,6 +81,7 @@ const products = [
     numReviews: 0,
     price: 59.99,
     countInStock: 3,
+    isFavorite: false,
   },
   {
     image: "/images/pop_BJPenn.jpg",
@@ -89,6 +95,7 @@ const products = [
     numReviews: 0,
     price: 60.99,
     countInStock: 3,
+    isFavorite: false,
   },
   {
     image: "/images/pop_BleachIchigoBankaiTensaZangetsu.jpg",
@@ -102,6 +109,7 @@ const products = [
     numReviews: 0,
     price: 45.99,
     countInStock: 3,
+    isFavorite: false,
   },
 ];
 

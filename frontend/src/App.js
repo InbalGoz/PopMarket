@@ -9,6 +9,7 @@ import PopularProducts from "./shared/pages/productsPages/PopularProducts";
 import SpecialProducts from "./shared/pages/productsPages/SpecialProducts";
 import OtherProducts from "./shared/pages/productsPages/OtherProducts";
 import PopProductPage from "./product/pages/PopProductPage";
+import CartPage from "./user/pages/CartPage";
 import RegisterPage from "./user/pages/RegisterPage";
 import LoginPage from "./user/pages/LoginPage";
 
@@ -28,6 +29,7 @@ const App = () => {
           <Route path='speicalproducts' element={<SpecialProducts />} />
           <Route path='moreproducts' element={<OtherProducts />} />
           <Route path='product/:id' element={<PopProductPage />} />
+          <Route path='cart' element={<CartPage />} />
           <Route path='wishList' element={<WishListPage />} />
         </Routes>
       </div>
@@ -38,5 +40,6 @@ const App = () => {
 export default App;
 
 //shoppingCart;
+// <Route path='cart/:id/*' element={<CartPage />} />
 
 //mongodb+srv://Inbal:T78y0101u@inbalgoz.2yxesmj.mongodb.net/PopMarket

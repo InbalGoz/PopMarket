@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import Loader from "../../shared/components/Loader";
 import Message from "../../shared/components/Message";
 import Footer from "../../shared/components/Footer";
@@ -12,12 +12,16 @@ import {
   Divider,
   Paper,
   Button,
+  InputLabel,
+  MenuItem,
+  FormControl,
+  Select,
 } from "@mui/material";
-import pop1 from "../../images/cruella1.jpg";
 
 //redux
 import { useSelector, useDispatch } from "react-redux";
 import { fetchProduct, updateProduct } from "../../redux/slices/productSlice";
+import { addCartItem } from "../../redux/slices/cartSlice";
 import { productService } from "../../services/productService";
 
 const labels = {
@@ -35,17 +39,21 @@ const labels = {
 
 const PopProductPage = () => {
   const { id } = useParams();
-  console.log("product id page", id);
-  const [qty, setQty] = useState(1);
+  let navigate = useNavigate();
+  //const [qty, setQty] = useState(1);
   //const [rating, setRating] = useState(0);
 
   const dispatch = useDispatch();
   const { loading, error, product } = useSelector((state) => state.product);
+
   useEffect(() => {
     dispatch(fetchProduct(id));
-
-    console.log("fetched pro", product);
   }, []);
+
+  const addToCartHandler = () => {
+    dispatch(addCartItem(id));
+    // navigate(`/cart/${id}`);
+  };
 
   const handleClickRating = (event) => {
     event.preventDefault();
@@ -64,6 +72,7 @@ const PopProductPage = () => {
       numReviews: product.numReviews,
       price: product.price,
       countInStock: product.countInStock,
+      isFavorite: product.isFavorite,
     };
     dispatch(updateProduct(newProduct));
     // setRating(event.target.value);
@@ -154,9 +163,17 @@ const PopProductPage = () => {
               <Typography sx={{ mb: 2, mt: 2, p: 1 }}>
                 Status: {product.countInStock > 0 ? "In Stock" : "Out Of Stock"}
               </Typography>
+
               <Divider />
               <Box textAlign='center'>
-                <Button>Add to cart</Button>
+                <Button
+                  variant='contained'
+                  sx={{ mb: 1, mt: 2 }}
+                  disabled={product.countInStock === 0}
+                  onClick={addToCartHandler}
+                >
+                  Add to cart
+                </Button>
               </Box>
             </Paper>
           </Box>
@@ -168,3 +185,30 @@ const PopProductPage = () => {
 };
 
 export default PopProductPage;
+
+/*
+<Divider />
+              <Typography sx={{ mb: 2, mt: 2, p: 1 }}>
+                Quantity:{" "}
+                {product.countInStock > 0 && (
+                  <FormControl
+                    sx={{ ml: 1, mt: -1, minWidth: 120 }}
+                    size='small'
+                  >
+                    <Select
+                      labelId='select-small'
+                      id='select-small'
+                      value={qty}
+                      //label='Age'
+                      onChange={(event) => setQty(event.target.value)}
+                    >
+                      {[...Array(product.countInStock).keys()].map((x) => (
+                        <MenuItem key={x + 1} value={x + 1}>
+                          {x + 1}
+                        </MenuItem>
+                      ))}
+                    </Select>
+                  </FormControl>
+                )}
+              </Typography>
+*/

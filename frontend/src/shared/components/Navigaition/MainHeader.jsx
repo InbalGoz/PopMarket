@@ -56,7 +56,7 @@ const HomeHeader = () => {
               </IconButton>
             </Link>
             <Link
-              to='/shoppingCart'
+              to='/cart'
               style={{
                 color: "black",
               }}

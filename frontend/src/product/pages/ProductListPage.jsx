@@ -31,6 +31,9 @@ const ProductListPage = () => {
 
   const dispatch = useDispatch();
   const { loading, productList } = useSelector((state) => state.product);
+  const { itemList } = useSelector((state) => state.wishList);
+
+  // console.log("wishlistpagee", itemList);
 
   useEffect(() => {
     if (location.pathname === "/popularproducts") {
@@ -39,7 +42,7 @@ const ProductListPage = () => {
       dispatch(fetchNewProducts());
     } else if (location.pathname === "/speicalproducts") {
       dispatch(fetchSpecialProducts());
-    } else {
+    } else if (location.pathname === "/moreproducts") {
       dispatch(fetchOtherProducts());
     }
   }, [dispatch]);
@@ -52,6 +55,9 @@ const ProductListPage = () => {
       : location.pathname === "/speicalproducts"
       ? "Special Pops"
       : "Other types Pops";
+  //location.pathname === "/moreproducts"
+  // ? "Other types Pops"
+  // : "Wish List";
 
   return (
     <Stack
@@ -74,20 +80,7 @@ const ProductListPage = () => {
           justifyContent='center'
           alignItems='center'
           sx={{ mb: 3 }}
-        >
-          <Typography
-            variant='h3'
-            component='div'
-            sx={{
-              fontFamily: "Lobster, cursive",
-              backgroundColor: "yellow",
-              width: 800,
-              textAlign: "center",
-            }}
-          >
-            {header}
-          </Typography>
-        </Box>
+        ></Box>
         <Box
           display='flex'
           justifyContent='center'
@@ -171,3 +164,12 @@ otherProducts.map((product, index) => (
               ))
             )}
 */
+
+/*
+: itemList ? (
+              itemList.map((product, index) => (
+                <Box key={index} sx={{ m: 1 }}>
+                  <PopProduct popProduct={product} />
+                </Box>
+              ))
+            )*/
